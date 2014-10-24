@@ -75,7 +75,7 @@ static NSString *const kTableViewCellReuseIdentifier = @"kTableViewCellReuseIden
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger index = indexPath.row;
-    NSDictionary *note = self.notes[index];
+    NSMutableDictionary *note = self.notes[index];
     DetailViewController *detailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"dvcontroller"];
     detailVC.index = index;
     detailVC.note = note;
@@ -92,11 +92,10 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
          didFinishWithTitle:(NSString *)title
                    withBody:(NSString *)body
 {
-    NSDictionary *note = @{
-        @"Date": [NSDate date],
-        @"Title": title,
-        @"Body": body
-    };
+    NSMutableDictionary *note = [NSMutableDictionary new];
+    note[@"Date"] = [NSDate date];
+    note[@"Title"] = title;
+    note[@"Body"] = body;
     
     [self.notes addObject:note];
     [self.tableView reloadData];
@@ -104,25 +103,10 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)inputViewController:(InputViewController *)inVc
-         didFinishWithTitle:(NSString *)title
-                   withBody:(NSString *)body
-                  withIndex:(NSInteger)index
-
-{
-    self.notes[index] = @{
-        @"Date": [NSDate date],
-        @"Title": title,
-        @"Body": body
-    };
-    [self.tableView reloadData];
-    
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)inputViewControllerDidCancel:(InputViewController *)inVc
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
 }
 
 #pragma mark - DetailViewControllerDelegate Methods
@@ -132,6 +116,11 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     [self.tableView reloadData];
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)detailViewControllerDidUpdate:(DetailViewController *)detailVc
+{
+    [self.tableView reloadData];
 }
 
 #pragma mark - Interface Actions

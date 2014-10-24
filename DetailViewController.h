@@ -13,6 +13,7 @@
 @protocol DetailViewControllerDelegate <NSObject>
 
 - (void)detailViewControllerDidDelete:(DetailViewController *)detailVc;
+- (void)detailViewControllerDidUpdate:(DetailViewController *)detailVc;
 
 @end
 
@@ -21,7 +22,7 @@
 @property (nonatomic, weak) id<DetailViewControllerDelegate> delegate;
 
 @property (nonatomic) NSInteger index;
-@property (nonatomic) NSDictionary *note;
+@property (nonatomic) NSMutableDictionary *note;
 
 
 @end

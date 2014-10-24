@@ -75,6 +75,9 @@
                                 <state key="normal" title="Edit">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="editButtonPressed:" destination="JMo-A8-BoI" eventType="touchUpInside" id="3ry-T0-T26"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5yS-OI-AbR">
                                 <rect key="frame" x="16" y="562" width="44" height="30"/>
@@ -129,7 +132,7 @@
         <!--Note Controller-->
         <scene sceneID="QbV-rD-exo">
             <objects>
-                <viewController id="Ge4-xm-2Va" userLabel="Note Controller" customClass="InputViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="incontroller" id="Ge4-xm-2Va" userLabel="Note Controller" customClass="InputViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uTk-aF-gun"/>
                         <viewControllerLayoutGuide type="bottom" id="EzC-3v-uXx"/>
@@ -218,6 +221,6 @@
         <image name="plus" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sBI-Dw-Ghc"/>
+        <segue reference="Oi7-Je-Cea"/>
     </inferredMetricsTieBreakers>
 </document>

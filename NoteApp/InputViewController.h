@@ -15,10 +15,6 @@
 - (void)inputViewController:(InputViewController *)inVc
          didFinishWithTitle:(NSString *)title
                    withBody:(NSString *)body;
-- (void)inputViewController:(InputViewController *)inVc
-         didFinishWithTitle:(NSString *)title
-                   withBody:(NSString *)body
-                  withIndex:(NSInteger)index;
 
 - (void)inputViewControllerDidCancel:(InputViewController *)inVc;
 
@@ -27,5 +23,8 @@
 @interface InputViewController : UIViewController
 
 @property (nonatomic, weak) id<InputViewControllerDelegate> delegate;
+
+@property (weak, nonatomic) IBOutlet UITextField *titleField;
+@property (weak, nonatomic) IBOutlet UITextView *bodyView;
 
 @end

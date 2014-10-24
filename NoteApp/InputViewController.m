@@ -11,11 +11,6 @@
 
 @interface InputViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextField *titleField;
-@property (weak, nonatomic) IBOutlet UITextView *bodyView;
-@property (nonatomic) NSInteger index;
-
-
 @end
 
 @implementation InputViewController
@@ -51,18 +46,9 @@
     if ([self.titleField.text isEqualToString:@""] || self.titleField.text == nil) {
         [self.delegate inputViewControllerDidCancel:self];
     } else {
-        if (self.index)
-        {
-            [self.delegate inputViewController:self
-                            didFinishWithTitle:self.titleField.text
-                                      withBody:self.bodyView.text
-                                     withIndex:self.index];
-        }
-        else {
-            [self.delegate inputViewController:self
-                            didFinishWithTitle:self.titleField.text
-                                      withBody:self.bodyView.text];
-        }
+        [self.delegate inputViewController:self
+                        didFinishWithTitle:self.titleField.text
+                                  withBody:self.bodyView.text];
     }
 }
 
