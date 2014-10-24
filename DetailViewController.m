@@ -33,7 +33,7 @@
 }
 
 - (IBAction)deleteButtonPressed:(id)sender {
-    [self.delegate DetailViewControllerDidDelete:self];
+    [self.delegate detailViewControllerDidDelete:self];
 }
 
 @end

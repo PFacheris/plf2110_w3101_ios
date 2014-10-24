@@ -12,7 +12,7 @@
 
 static NSString *const kTableViewCellReuseIdentifier = @"kTableViewCellReuseIdentifier";
 
-@interface NotesController () <UITableViewDelegate, UITableViewDataSource, InputViewControllerDelegate>
+@interface NotesController () <UITableViewDelegate, UITableViewDataSource, InputViewControllerDelegate, DetailViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -79,6 +79,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     DetailViewController *detailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"dvcontroller"];
     detailVC.index = index;
     detailVC.note = note;
+    detailVC.delegate = self;
     
     [self.navigationController pushViewController:detailVC
                                          animated:YES];
@@ -125,9 +126,11 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 }
 
 #pragma mark - DetailViewControllerDelegate Methods
-- (void)DetailViewControllerDidDelete:(DetailViewController *)detailVc
+- (void)detailViewControllerDidDelete:(DetailViewController *)detailVc
 {
     [self.notes removeObjectAtIndex:detailVc.index];
+    [self.tableView reloadData];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

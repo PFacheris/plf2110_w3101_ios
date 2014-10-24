@@ -12,7 +12,7 @@
 
 @protocol DetailViewControllerDelegate <NSObject>
 
-- (void)DetailViewControllerDidDelete:(DetailViewController *)detailVc;
+- (void)detailViewControllerDidDelete:(DetailViewController *)detailVc;
 
 @end
 
