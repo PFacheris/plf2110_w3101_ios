@@ -13,11 +13,25 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
 @property (weak, nonatomic) IBOutlet UITextView *bodyView;
+@property (nonatomic) NSInteger index;
 
 
 @end
 
 @implementation InputViewController
+
+-(id)initWithIndex:(NSInteger)index
+             title:(NSString *)title
+              body:(NSString *)body
+{
+    self = [super init];
+    if (self) {
+        self.index = index;
+        self.titleField.text = title;
+        self.bodyView.text = body;
+    }
+    return self;
+}
 
 - (void)loadView {
     [super loadView];
@@ -50,10 +64,18 @@
     if ([self.titleField.text isEqualToString:@""] || self.titleField.text == nil) {
         [self.delegate inputViewControllerDidCancel:self];
     } else {
-        NSLog(@"cool");
-        [self.delegate inputViewController:self
-                         didFinishWithTitle:self.titleField.text
-                                   withBody:self.bodyView.text];
+        if (self.index)
+        {
+            [self.delegate inputViewController:self
+                            didFinishWithTitle:self.titleField.text
+                                      withBody:self.bodyView.text
+                                     withIndex:self.index];
+        }
+        else {
+            [self.delegate inputViewController:self
+                            didFinishWithTitle:self.titleField.text
+                                      withBody:self.bodyView.text];
+        }
     }
 }
 

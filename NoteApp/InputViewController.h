@@ -13,7 +13,12 @@
 @protocol InputViewControllerDelegate <NSObject>
 
 - (void)inputViewController:(InputViewController *)inVc
-         didFinishWithTitle:(NSString *)title withBody:(NSString *)body;
+         didFinishWithTitle:(NSString *)title
+                   withBody:(NSString *)body;
+- (void)inputViewController:(InputViewController *)inVc
+         didFinishWithTitle:(NSString *)title
+                   withBody:(NSString *)body
+                  withIndex:(NSInteger)index;
 
 - (void)inputViewControllerDidCancel:(InputViewController *)inVc;
 

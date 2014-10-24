@@ -8,6 +8,7 @@
 
 #import "NotesController.h"
 #import "InputViewController.h"
+#import "DetailViewController.h"
 
 static NSString *const kTableViewCellReuseIdentifier = @"kTableViewCellReuseIdentifier";
 
@@ -70,11 +71,25 @@ static NSString *const kTableViewCellReuseIdentifier = @"kTableViewCellReuseIden
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger index = indexPath.row;
+    NSDictionary *note = self.notes[index];
+    DetailViewController *detailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"dvcontroller"];
+    detailVC.index = index;
+    detailVC.note = note;
+    
+    [self.navigationController pushViewController:detailVC
+                                         animated:YES];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 #pragma mark - InputViewControllerDelegate Methods
 - (void)inputViewController:(InputViewController *)inVc
          didFinishWithTitle:(NSString *)title
                    withBody:(NSString *)body
-
 {
     NSDictionary *note = @{
         @"Date": [NSDate date],
@@ -85,14 +100,28 @@ static NSString *const kTableViewCellReuseIdentifier = @"kTableViewCellReuseIden
     [self.notes addObject:note];
     [self.tableView reloadData];
     
-    [self dismissViewControllerAnimated:YES
-                             completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)inputViewController:(InputViewController *)inVc
+         didFinishWithTitle:(NSString *)title
+                   withBody:(NSString *)body
+                  withIndex:(NSInteger)index
+
+{
+    self.notes[index] = @{
+        @"Date": [NSDate date],
+        @"Title": title,
+        @"Body": body
+    };
+    [self.tableView reloadData];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)inputViewControllerDidCancel:(InputViewController *)inVc
 {
-    [self dismissViewControllerAnimated:YES
-                             completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -106,18 +135,5 @@ static NSString *const kTableViewCellReuseIdentifier = @"kTableViewCellReuseIden
         inputVC.delegate = self;
     }
 }
-
-//- (IBAction)addRowButtonPressed:(id)sender
-//{
-//    [self.notes addObject:[NSString note]];
-//    
-//    NSInteger rowToAdd = self.notes.count - 1;
-//    NSIndexPath *path = [NSIndexPath indexPathForRow:rowToAdd inSection:0];
-//    
-//    [self.tableView insertRowsAtIndexPaths:@[path]
-//                          withRowAnimation:UITableViewRowAnimationTop];
-//    
-//    
-//}
 
 @end
