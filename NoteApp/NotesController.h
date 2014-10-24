@@ -10,6 +10,5 @@
 
 @interface NotesController : UIViewController
 
-
 @end
 

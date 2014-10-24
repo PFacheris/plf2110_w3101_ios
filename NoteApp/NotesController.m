@@ -16,6 +16,8 @@ static NSString *const kTableViewCellReuseIdentifier = @"kTableViewCellReuseIden
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property (strong, nonatomic) NSString *path;
+
 @property (nonatomic) NSMutableArray *notes;
 
 @end
@@ -27,11 +29,11 @@ static NSString *const kTableViewCellReuseIdentifier = @"kTableViewCellReuseIden
     // Do any additional setup after loading the view, typically from a nib.
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0]; //2
-    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"data.plist"];
+    self.path = [documentsDirectory stringByAppendingPathComponent:@"data.plist"];
     
-    if ([[NSFileManager defaultManager] fileExistsAtPath:path])
+    if ([[NSFileManager defaultManager] fileExistsAtPath:self.path])
     {
-        self.notes = [[NSMutableArray alloc] initWithContentsOfFile:path];
+        self.notes = [[NSMutableArray alloc] initWithContentsOfFile:self.path];
     }
     
     else
@@ -41,6 +43,10 @@ static NSString *const kTableViewCellReuseIdentifier = @"kTableViewCellReuseIden
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+}
+
+- (void)saveNotes {
+    [self.notes writeToFile: self.path atomically:YES];
 }
 
 #pragma mark - UITableViewDataSource Methods
@@ -98,6 +104,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     note[@"Body"] = body;
     
     [self.notes addObject:note];
+    [self saveNotes];
     [self.tableView reloadData];
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -113,6 +120,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)detailViewControllerDidDelete:(DetailViewController *)detailVc
 {
     [self.notes removeObjectAtIndex:detailVc.index];
+    [self saveNotes];
     [self.tableView reloadData];
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -120,6 +128,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)detailViewControllerDidUpdate:(DetailViewController *)detailVc
 {
+    [self saveNotes];
     [self.tableView reloadData];
 }
 
