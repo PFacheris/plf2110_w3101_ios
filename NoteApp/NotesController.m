@@ -35,17 +35,17 @@ static NSString *const kTableViewCellReuseIdentifier = @"kTableViewCellReuseIden
     {
         self.notes = [[NSMutableArray alloc] initWithContentsOfFile:self.path];
     }
-    
     else
     {
         self.notes = [[NSMutableArray alloc] init];
     }
     
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 }
 
-- (void)saveNotes {
+- (void)serializeNotes {
     [self.notes writeToFile: self.path atomically:YES];
 }
 
@@ -98,6 +98,24 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)inputViewController:(InputViewController *)inVc
          didFinishWithTitle:(NSString *)title
                    withBody:(NSString *)body
+              withImagePath:(NSString *)imagePath
+{
+    NSMutableDictionary *note = [NSMutableDictionary new];
+    note[@"Date"] = [NSDate date];
+    note[@"Title"] = title;
+    note[@"Body"] = body;
+    note[@"ImagePath"] = imagePath;
+    
+    [self.notes addObject:note];
+    [self serializeNotes];
+    [self.tableView reloadData];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)inputViewController:(InputViewController *)inVc
+         didFinishWithTitle:(NSString *)title
+                   withBody:(NSString *)body
 {
     NSMutableDictionary *note = [NSMutableDictionary new];
     note[@"Date"] = [NSDate date];
@@ -105,7 +123,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     note[@"Body"] = body;
     
     [self.notes addObject:note];
-    [self saveNotes];
+    [self serializeNotes];
     [self.tableView reloadData];
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -121,7 +139,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)detailViewControllerDidDelete:(DetailViewController *)detailVc
 {
     [self.notes removeObjectAtIndex:detailVc.index];
-    [self saveNotes];
+    [self serializeNotes];
     [self.tableView reloadData];
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -129,7 +147,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)detailViewControllerDidUpdate:(DetailViewController *)detailVc
 {
-    [self saveNotes];
+    [self serializeNotes];
     [self.tableView reloadData];
 }
 

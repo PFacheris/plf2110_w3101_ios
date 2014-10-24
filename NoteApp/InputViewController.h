@@ -14,6 +14,11 @@
 
 - (void)inputViewController:(InputViewController *)inVc
          didFinishWithTitle:(NSString *)title
+                   withBody:(NSString *)body
+              withImagePath:(NSString *)imagePath;
+
+- (void)inputViewController:(InputViewController *)inVc
+         didFinishWithTitle:(NSString *)title
                    withBody:(NSString *)body;
 
 - (void)inputViewControllerDidCancel:(InputViewController *)inVc;
@@ -26,7 +31,6 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
 @property (weak, nonatomic) IBOutlet UITextView *bodyView;
-@property (weak, nonatomic) NSString *imagePath;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end

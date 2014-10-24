@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UITextView *dateView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
@@ -20,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self reloadText];
+    [self reloadUI];
     self.textView.editable = NO;
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -28,11 +29,18 @@
     
     self.dateView.text = [dateFormatter stringFromDate:self.note[@"Date"]];
     self.dateView.editable = NO;
+    
 }
 
-- (void)reloadText {
+- (void)reloadUI {
     self.title = self.note[@"Title"];
     self.textView.text = self.note[@"Body"];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    self.imageView.image = [UIImage imageWithContentsOfFile:
+                                [documentsDirectory stringByAppendingPathComponent:self.note[@"ImagePath"]]
+                            ];
 }
 
 #pragma mark - Interface Actions
@@ -50,16 +58,35 @@
     [inputVC view];
     inputVC.bodyView.text = self.note[@"Body"];
     inputVC.titleField.text = self.note[@"Title"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    inputVC.imageView.image = [UIImage imageWithContentsOfFile:
+                            [documentsDirectory stringByAppendingPathComponent:self.note[@"ImagePath"]]
+                            ];
+    [inputVC.imageView setNeedsDisplay];
 }
 
 #pragma mark - InputViewControllerDelegate Methods
 - (void)inputViewController:(InputViewController *)inVc
          didFinishWithTitle:(NSString *)title
                    withBody:(NSString *)body
+              withImagePath:(NSString *)imagePath
 {
     self.note[@"Title"] = title;
     self.note[@"Body"] = body;
-    [self reloadText];
+    self.note[@"ImagePath"] = imagePath;
+    [self reloadUI];
+    [self.delegate detailViewControllerDidUpdate:self];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)inputViewController:(InputViewController *)inVc
+         didFinishWithTitle:(NSString *)title
+                   withBody:(NSString *)body
+{
+    self.note[@"Title"] = title;
+    self.note[@"Body"] = body;
+    [self reloadUI];
     [self.delegate detailViewControllerDidUpdate:self];
     [self.navigationController popViewControllerAnimated:YES];
 }

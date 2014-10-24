@@ -16,7 +16,6 @@
 		970E237819FA1EB7002B8CEA /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970E237719FA1EB7002B8CEA /* InputViewController.m */; };
 		970E237B19FA897F002B8CEA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970E237A19FA897F002B8CEA /* QuartzCore.framework */; };
 		97646AFB19FAA1A100A92EBA /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97646AFA19FAA1A100A92EBA /* DetailViewController.m */; };
-		97BA580D19FA076800FE1688 /* data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97BA580C19FA076800FE1688 /* data.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +46,6 @@
 		970E237A19FA897F002B8CEA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		97646AFA19FAA1A100A92EBA /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailViewController.m; path = ../DetailViewController.m; sourceTree = "<group>"; };
 		97646AFC19FAA1E800A92EBA /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailViewController.h; path = ../DetailViewController.h; sourceTree = "<group>"; };
-		97BA580C19FA076800FE1688 /* data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = data.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +109,6 @@
 			children = (
 				97042AA219F855C9002EEA71 /* Info.plist */,
 				97042AA319F855C9002EEA71 /* main.m */,
-				97BA580C19FA076800FE1688 /* data.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -213,7 +210,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97BA580D19FA076800FE1688 /* data.plist in Resources */,
 				97042AAD19F855C9002EEA71 /* Main.storyboard in Resources */,
 				97042AAF19F855C9002EEA71 /* Images.xcassets in Resources */,
 			);

@@ -11,6 +11,8 @@
 
 @interface InputViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
+@property (strong, nonatomic) NSString *imagePath;
+
 @end
 
 @implementation InputViewController
@@ -46,9 +48,17 @@
     if ([self.titleField.text isEqualToString:@""] || self.titleField.text == nil) {
         [self.delegate inputViewControllerDidCancel:self];
     } else {
-        [self.delegate inputViewController:self
-                        didFinishWithTitle:self.titleField.text
-                                  withBody:self.bodyView.text];
+        if (self.imagePath) {
+            [self.delegate inputViewController:self
+                            didFinishWithTitle:self.titleField.text
+                                      withBody:self.bodyView.text
+                                 withImagePath:self.imagePath];
+        }
+        else {
+            [self.delegate inputViewController:self
+                            didFinishWithTitle:self.titleField.text
+                                      withBody:self.bodyView.text];
+        }
     }
 }
 
@@ -63,11 +73,18 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    NSURL *urlPath = [info valueForKey:UIImagePickerControllerReferenceURL];
-    self.imagePath = [urlPath absoluteString];
+    self.imageView.image = [info valueForKey:UIImagePickerControllerOriginalImage];
     
-    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    self.imageView.image = image;
+    NSData *imageData = UIImageJPEGRepresentation(self.imageView.image, 1);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSUUID *uuid = [NSUUID UUID];
+    
+    NSString *imagePath = [documentsDirectory stringByAppendingPathComponent:[uuid UUIDString]];
+    [imageData writeToFile:imagePath atomically:YES];
+    
+    self.imagePath = [uuid UUIDString];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }

@@ -66,7 +66,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="test" translatesAutoresizingMaskIntoConstraints="NO" id="V7y-yz-irn">
-                                <rect key="frame" x="16" y="112" width="568" height="395"/>
+                                <rect key="frame" x="16" y="112" width="568" height="191"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -91,6 +91,9 @@
                                     <action selector="deleteButtonPressed:" destination="JMo-A8-BoI" eventType="touchUpInside" id="Co3-qe-c2X"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="omB-vN-c0y">
+                                <rect key="frame" x="16" y="311" width="568" height="243"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -101,28 +104,38 @@
                             <constraint firstAttribute="centerX" secondItem="1d6-pk-TMP" secondAttribute="centerX" id="5ye-fi-iaK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5yS-OI-AbR" secondAttribute="trailing" constant="524" id="6ES-6S-0V4"/>
                             <constraint firstItem="1d6-pk-TMP" firstAttribute="top" secondItem="LGK-Ag-AQZ" secondAttribute="bottom" constant="8" id="9UR-Yp-C3t"/>
+                            <constraint firstItem="lj2-ra-1FU" firstAttribute="top" secondItem="omB-vN-c0y" secondAttribute="bottom" constant="8" id="C5O-Ab-Tcv"/>
+                            <constraint firstItem="omB-vN-c0y" firstAttribute="top" secondItem="LGK-Ag-AQZ" secondAttribute="bottom" constant="247" id="G7o-vO-Lto"/>
                             <constraint firstItem="V7y-yz-irn" firstAttribute="top" secondItem="LGK-Ag-AQZ" secondAttribute="bottom" constant="48" id="H7G-7R-xAz"/>
                             <constraint firstItem="5yS-OI-AbR" firstAttribute="top" secondItem="V7y-yz-irn" secondAttribute="bottom" constant="55" id="HyS-dQ-Okk"/>
                             <constraint firstItem="5yS-OI-AbR" firstAttribute="leading" secondItem="hV8-Qd-NB5" secondAttribute="leadingMargin" id="Kra-e3-2KJ"/>
+                            <constraint firstItem="omB-vN-c0y" firstAttribute="trailing" secondItem="hV8-Qd-NB5" secondAttribute="trailingMargin" id="Tyt-DV-N3R"/>
                             <constraint firstItem="1d6-pk-TMP" firstAttribute="trailing" secondItem="hV8-Qd-NB5" secondAttribute="trailingMargin" id="UWH-Cc-nnD"/>
                             <constraint firstItem="lj2-ra-1FU" firstAttribute="top" secondItem="V7y-yz-irn" secondAttribute="bottom" constant="55" id="Uba-da-N39"/>
                             <constraint firstItem="r94-K8-s7J" firstAttribute="top" secondItem="1d6-pk-TMP" secondAttribute="bottom" constant="488" id="W65-WC-YFk"/>
                             <constraint firstItem="r94-K8-s7J" firstAttribute="top" secondItem="lj2-ra-1FU" secondAttribute="bottom" constant="8" id="XOp-Ac-bRb"/>
                             <constraint firstItem="V7y-yz-irn" firstAttribute="top" secondItem="1d6-pk-TMP" secondAttribute="bottom" id="YRN-NE-GKm"/>
+                            <constraint firstItem="5yS-OI-AbR" firstAttribute="top" secondItem="omB-vN-c0y" secondAttribute="bottom" constant="8" id="ZFx-Ut-SW9"/>
                             <constraint firstItem="r94-K8-s7J" firstAttribute="top" secondItem="5yS-OI-AbR" secondAttribute="bottom" constant="8" id="ZTP-ng-nAX"/>
+                            <constraint firstItem="omB-vN-c0y" firstAttribute="leading" secondItem="hV8-Qd-NB5" secondAttribute="leadingMargin" id="fXq-Cu-faX"/>
                             <constraint firstItem="V7y-yz-irn" firstAttribute="trailing" secondItem="hV8-Qd-NB5" secondAttribute="trailingMargin" id="hhh-LZ-05Z"/>
+                            <constraint firstAttribute="centerX" secondItem="omB-vN-c0y" secondAttribute="centerX" id="pJf-dn-K3q"/>
+                            <constraint firstItem="omB-vN-c0y" firstAttribute="top" secondItem="V7y-yz-irn" secondAttribute="bottom" constant="8" id="pLT-sK-hFl"/>
                             <constraint firstItem="lj2-ra-1FU" firstAttribute="trailing" secondItem="hV8-Qd-NB5" secondAttribute="trailingMargin" id="wsZ-XG-863"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="6ES-6S-0V4"/>
+                                <exclude reference="HyS-dQ-Okk"/>
                                 <exclude reference="W65-WC-YFk"/>
                                 <exclude reference="3m3-NY-mnn"/>
+                                <exclude reference="Uba-da-N39"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="dateView" destination="1d6-pk-TMP" id="jTI-Nn-KJP"/>
+                        <outlet property="imageView" destination="omB-vN-c0y" id="IvX-wF-XWk"/>
                         <outlet property="textView" destination="V7y-yz-irn" id="JtM-gu-QeJ"/>
                         <segue destination="Ge4-xm-2Va" kind="show" identifier="DetailToInput" id="sBI-Dw-Ghc"/>
                     </connections>
@@ -259,6 +272,6 @@
         <image name="plus" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Oi7-Je-Cea"/>
+        <segue reference="sBI-Dw-Ghc"/>
     </inferredMetricsTieBreakers>
 </document>
