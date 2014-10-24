@@ -9,7 +9,7 @@
 #import "InputViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface InputViewController ()
+@interface InputViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @end
 
@@ -50,6 +50,26 @@
                         didFinishWithTitle:self.titleField.text
                                   withBody:self.bodyView.text];
     }
+}
+
+- (IBAction)addImageButtonPressed:(id)sender {
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePickerController.delegate = self;
+    [self presentViewController:imagePickerController animated:YES completion:nil];
+}
+
+#pragma mark - UIImagePickerControllerDelegate Methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSURL *urlPath = [info valueForKey:UIImagePickerControllerReferenceURL];
+    self.imagePath = [urlPath absoluteString];
+    
+    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    self.imageView.image = image;
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

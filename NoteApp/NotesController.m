@@ -72,6 +72,7 @@ static NSString *const kTableViewCellReuseIdentifier = @"kTableViewCellReuseIden
     NSInteger row = [indexPath row];
     NSDictionary *note = self.notes[row];
     cell.textLabel.text = note[@"Title"];
+    cell.textLabel.textColor = UIColorFromRGB(0x70C2E4);
     cell.detailTextLabel.text = [dateFormatter stringFromDate:note[@"Date"]];
     
     return cell;
