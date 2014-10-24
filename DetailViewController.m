@@ -80,7 +80,7 @@
     ];
     NSString *mimeType = @"image/jpeg";
     
-    [mc addAttachmentData:fileData mimeType:mimeType fileName:self.note[@"Title"]];
+    [mc addAttachmentData:fileData mimeType:mimeType fileName:[self.note[@"Title"] stringByStandardizingPath]];
     
     [self presentViewController:mc animated:YES completion:nil];
 }
