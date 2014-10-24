@@ -98,6 +98,15 @@ static NSString *const kTableViewCellReuseIdentifier = @"kTableViewCellReuseIden
 
 #pragma mark - Interface Actions
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue
+                 sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ListToInput"]) {
+        InputViewController *inputVC = segue.destinationViewController;
+        inputVC.delegate = self;
+    }
+}
+
 //- (IBAction)addRowButtonPressed:(id)sender
 //{
 //    [self.notes addObject:[NSString note]];

@@ -14,6 +14,7 @@
 		97042AAF19F855C9002EEA71 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97042AAE19F855C9002EEA71 /* Images.xcassets */; };
 		97042ABE19F855C9002EEA71 /* NoteAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 97042ABD19F855C9002EEA71 /* NoteAppTests.m */; };
 		970E237819FA1EB7002B8CEA /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970E237719FA1EB7002B8CEA /* InputViewController.m */; };
+		970E237B19FA897F002B8CEA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970E237A19FA897F002B8CEA /* QuartzCore.framework */; };
 		97BA580D19FA076800FE1688 /* data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97BA580C19FA076800FE1688 /* data.plist */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		97042ABD19F855C9002EEA71 /* NoteAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoteAppTests.m; sourceTree = "<group>"; };
 		970E237719FA1EB7002B8CEA /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
 		970E237919FA1ED1002B8CEA /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
+		970E237A19FA897F002B8CEA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		97BA580C19FA076800FE1688 /* data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = data.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -50,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				970E237B19FA897F002B8CEA /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +69,7 @@
 		97042A9519F855C9002EEA71 = {
 			isa = PBXGroup;
 			children = (
+				970E237A19FA897F002B8CEA /* QuartzCore.framework */,
 				97042AA019F855C9002EEA71 /* NoteApp */,
 				97042ABA19F855C9002EEA71 /* NoteAppTests */,
 				97042A9F19F855C9002EEA71 /* Products */,
