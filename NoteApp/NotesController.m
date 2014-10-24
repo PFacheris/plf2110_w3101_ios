@@ -27,8 +27,7 @@ static NSString *const kTableViewCellReuseIdentifier = @"kTableViewCellReuseIden
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0]; //2
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     self.path = [documentsDirectory stringByAppendingPathComponent:@"data.plist"];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:self.path])
@@ -47,6 +46,19 @@ static NSString *const kTableViewCellReuseIdentifier = @"kTableViewCellReuseIden
 
 - (void)serializeNotes {
     [self.notes writeToFile: self.path atomically:YES];
+}
+
+- (void)removeImage:(NSString *)fileName
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+    NSError *error;
+    BOOL success = [fileManager removeItemAtPath:filePath error:&error];
+    if (!success) {
+        NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+    }
 }
 
 #pragma mark - UITableViewDataSource Methods
@@ -138,8 +150,10 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 #pragma mark - DetailViewControllerDelegate Methods
 - (void)detailViewControllerDidDelete:(DetailViewController *)detailVc
 {
+    NSString *imagePath = self.notes[detailVc.index][@"ImagePath"];
     [self.notes removeObjectAtIndex:detailVc.index];
     [self serializeNotes];
+    [self removeImage:imagePath];
     [self.tableView reloadData];
     
     [self.navigationController popViewControllerAnimated:YES];

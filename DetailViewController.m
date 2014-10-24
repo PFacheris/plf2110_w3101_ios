@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 Patrick Facheris. All rights reserved.
 //
 
+#import <MessageUI/MessageUI.h>
 #import "DetailViewController.h"
 #import "InputViewController.h"
 
-@interface DetailViewController () <InputViewControllerDelegate>
+@interface DetailViewController () <InputViewControllerDelegate, MFMailComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UITextView *dateView;
@@ -36,8 +37,7 @@
     self.title = self.note[@"Title"];
     self.textView.text = self.note[@"Body"];
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     self.imageView.image = [UIImage imageWithContentsOfFile:
                                 [documentsDirectory stringByAppendingPathComponent:self.note[@"ImagePath"]]
                             ];
@@ -64,6 +64,25 @@
                             [documentsDirectory stringByAppendingPathComponent:self.note[@"ImagePath"]]
                             ];
     [inputVC.imageView setNeedsDisplay];
+}
+
+- (IBAction)shareButtonPressed:(id)sender {
+    NSString *subject = self.note[@"Title"];
+    NSString *body = self.note[@"Body"];
+    
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:subject];
+    [mc setMessageBody:body isHTML:NO];
+    
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSData *fileData = [NSData dataWithContentsOfFile:[documentsDirectory stringByAppendingPathComponent:self.note[@"ImagePath"]]
+    ];
+    NSString *mimeType = @"image/jpeg";
+    
+    [mc addAttachmentData:fileData mimeType:mimeType fileName:self.note[@"Title"]];
+    
+    [self presentViewController:mc animated:YES completion:nil];
 }
 
 #pragma mark - InputViewControllerDelegate Methods
@@ -95,6 +114,12 @@
 {
     [self dismissViewControllerAnimated:YES
                              completion:nil];
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate Methods
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 

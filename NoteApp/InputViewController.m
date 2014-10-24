@@ -76,8 +76,7 @@
     self.imageView.image = [info valueForKey:UIImagePickerControllerOriginalImage];
     
     NSData *imageData = UIImageJPEGRepresentation(self.imageView.image, 1);
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
     NSUUID *uuid = [NSUUID UUID];
     

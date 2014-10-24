@@ -94,44 +94,42 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="omB-vN-c0y">
                                 <rect key="frame" x="16" y="311" width="568" height="243"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANE-CK-fVl">
+                                <rect key="frame" x="277" y="562" width="40" height="30"/>
+                                <state key="normal" title="Share">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareButtonPressed:" destination="JMo-A8-BoI" eventType="touchUpInside" id="uav-Km-sBf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1d6-pk-TMP" firstAttribute="leading" secondItem="hV8-Qd-NB5" secondAttribute="leadingMargin" id="0gQ-LS-o3Q"/>
                             <constraint firstItem="V7y-yz-irn" firstAttribute="width" secondItem="1d6-pk-TMP" secondAttribute="width" id="316-SX-tHk"/>
-                            <constraint firstItem="lj2-ra-1FU" firstAttribute="leading" secondItem="hV8-Qd-NB5" secondAttribute="leadingMargin" constant="538" id="3m3-NY-mnn"/>
                             <constraint firstItem="V7y-yz-irn" firstAttribute="leading" secondItem="hV8-Qd-NB5" secondAttribute="leadingMargin" id="5dv-xk-wgH"/>
                             <constraint firstAttribute="centerX" secondItem="1d6-pk-TMP" secondAttribute="centerX" id="5ye-fi-iaK"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="5yS-OI-AbR" secondAttribute="trailing" constant="524" id="6ES-6S-0V4"/>
                             <constraint firstItem="1d6-pk-TMP" firstAttribute="top" secondItem="LGK-Ag-AQZ" secondAttribute="bottom" constant="8" id="9UR-Yp-C3t"/>
                             <constraint firstItem="lj2-ra-1FU" firstAttribute="top" secondItem="omB-vN-c0y" secondAttribute="bottom" constant="8" id="C5O-Ab-Tcv"/>
                             <constraint firstItem="omB-vN-c0y" firstAttribute="top" secondItem="LGK-Ag-AQZ" secondAttribute="bottom" constant="247" id="G7o-vO-Lto"/>
                             <constraint firstItem="V7y-yz-irn" firstAttribute="top" secondItem="LGK-Ag-AQZ" secondAttribute="bottom" constant="48" id="H7G-7R-xAz"/>
-                            <constraint firstItem="5yS-OI-AbR" firstAttribute="top" secondItem="V7y-yz-irn" secondAttribute="bottom" constant="55" id="HyS-dQ-Okk"/>
                             <constraint firstItem="5yS-OI-AbR" firstAttribute="leading" secondItem="hV8-Qd-NB5" secondAttribute="leadingMargin" id="Kra-e3-2KJ"/>
                             <constraint firstItem="omB-vN-c0y" firstAttribute="trailing" secondItem="hV8-Qd-NB5" secondAttribute="trailingMargin" id="Tyt-DV-N3R"/>
                             <constraint firstItem="1d6-pk-TMP" firstAttribute="trailing" secondItem="hV8-Qd-NB5" secondAttribute="trailingMargin" id="UWH-Cc-nnD"/>
-                            <constraint firstItem="lj2-ra-1FU" firstAttribute="top" secondItem="V7y-yz-irn" secondAttribute="bottom" constant="55" id="Uba-da-N39"/>
-                            <constraint firstItem="r94-K8-s7J" firstAttribute="top" secondItem="1d6-pk-TMP" secondAttribute="bottom" constant="488" id="W65-WC-YFk"/>
+                            <constraint firstItem="ANE-CK-fVl" firstAttribute="top" secondItem="omB-vN-c0y" secondAttribute="bottom" constant="8" id="W7e-kc-qSh"/>
                             <constraint firstItem="r94-K8-s7J" firstAttribute="top" secondItem="lj2-ra-1FU" secondAttribute="bottom" constant="8" id="XOp-Ac-bRb"/>
                             <constraint firstItem="V7y-yz-irn" firstAttribute="top" secondItem="1d6-pk-TMP" secondAttribute="bottom" id="YRN-NE-GKm"/>
                             <constraint firstItem="5yS-OI-AbR" firstAttribute="top" secondItem="omB-vN-c0y" secondAttribute="bottom" constant="8" id="ZFx-Ut-SW9"/>
                             <constraint firstItem="r94-K8-s7J" firstAttribute="top" secondItem="5yS-OI-AbR" secondAttribute="bottom" constant="8" id="ZTP-ng-nAX"/>
+                            <constraint firstItem="r94-K8-s7J" firstAttribute="top" secondItem="ANE-CK-fVl" secondAttribute="bottom" constant="8" id="eaZ-VM-rYV"/>
                             <constraint firstItem="omB-vN-c0y" firstAttribute="leading" secondItem="hV8-Qd-NB5" secondAttribute="leadingMargin" id="fXq-Cu-faX"/>
+                            <constraint firstAttribute="centerX" secondItem="ANE-CK-fVl" secondAttribute="centerX" constant="3" id="g8M-AK-Baa"/>
                             <constraint firstItem="V7y-yz-irn" firstAttribute="trailing" secondItem="hV8-Qd-NB5" secondAttribute="trailingMargin" id="hhh-LZ-05Z"/>
                             <constraint firstAttribute="centerX" secondItem="omB-vN-c0y" secondAttribute="centerX" id="pJf-dn-K3q"/>
                             <constraint firstItem="omB-vN-c0y" firstAttribute="top" secondItem="V7y-yz-irn" secondAttribute="bottom" constant="8" id="pLT-sK-hFl"/>
                             <constraint firstItem="lj2-ra-1FU" firstAttribute="trailing" secondItem="hV8-Qd-NB5" secondAttribute="trailingMargin" id="wsZ-XG-863"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="6ES-6S-0V4"/>
-                                <exclude reference="HyS-dQ-Okk"/>
-                                <exclude reference="W65-WC-YFk"/>
-                                <exclude reference="3m3-NY-mnn"/>
-                                <exclude reference="Uba-da-N39"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="dateView" destination="1d6-pk-TMP" id="jTI-Nn-KJP"/>
@@ -272,6 +270,6 @@
         <image name="plus" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sBI-Dw-Ghc"/>
+        <segue reference="Oi7-Je-Cea"/>
     </inferredMetricsTieBreakers>
 </document>
