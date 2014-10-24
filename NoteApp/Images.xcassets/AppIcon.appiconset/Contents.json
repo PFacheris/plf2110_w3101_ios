@@ -3,6 +3,12 @@
     {
       "idiom" : "iphone",
       "size" : "29x29",
+      "scale" : "1x"
+    },
+    {
+      "size" : "29x29",
+      "idiom" : "iphone",
+      "filename" : "58 - Settings-1.png",
       "scale" : "2x"
     },
     {
@@ -11,14 +17,25 @@
       "scale" : "3x"
     },
     {
-      "idiom" : "iphone",
       "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "80 - Spotlight-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "iphone",
       "size" : "40x40",
       "scale" : "3x"
+    },
+    {
+      "idiom" : "iphone",
+      "size" : "57x57",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "iphone",
+      "size" : "57x57",
+      "scale" : "2x"
     },
     {
       "idiom" : "iphone",
@@ -26,8 +43,9 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "180 - iPhone 6 Plus 2.png",
       "scale" : "3x"
     },
     {
@@ -36,8 +54,9 @@
       "scale" : "1x"
     },
     {
-      "idiom" : "ipad",
       "size" : "29x29",
+      "idiom" : "ipad",
+      "filename" : "58 - Settings.png",
       "scale" : "2x"
     },
     {
@@ -46,19 +65,48 @@
       "scale" : "1x"
     },
     {
-      "idiom" : "ipad",
       "size" : "40x40",
+      "idiom" : "ipad",
+      "filename" : "80 - Spotlight.png",
       "scale" : "2x"
     },
     {
       "idiom" : "ipad",
-      "size" : "76x76",
+      "size" : "50x50",
       "scale" : "1x"
     },
     {
       "idiom" : "ipad",
-      "size" : "76x76",
+      "size" : "50x50",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "72x72",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "72x72",
+      "scale" : "2x"
+    },
+    {
+      "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "76 - iPad (@1x).png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "152 - iPad.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "120x120",
+      "idiom" : "car",
+      "filename" : "120 - iPhone.png",
+      "scale" : "1x"
     }
   ],
   "info" : {
