@@ -20,19 +20,6 @@
 
 @implementation InputViewController
 
--(id)initWithIndex:(NSInteger)index
-             title:(NSString *)title
-              body:(NSString *)body
-{
-    self = [super init];
-    if (self) {
-        self.index = index;
-        self.titleField.text = title;
-        self.bodyView.text = body;
-    }
-    return self;
-}
-
 - (void)loadView {
     [super loadView];
     self.bodyView.layer.borderColor = [[[UIColor grayColor] colorWithAlphaComponent:0.5] CGColor];

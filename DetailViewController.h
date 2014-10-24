@@ -8,10 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class DetailViewController;
+
+@protocol DetailViewControllerDelegate <NSObject>
+
+- (void)DetailViewControllerDidDelete:(DetailViewController *)detailVc;
+
+@end
+
 @interface DetailViewController : UIViewController
 
-@property (nonatomic) NSInteger index;
+@property (nonatomic, weak) id<DetailViewControllerDelegate> delegate;
 
+@property (nonatomic) NSInteger index;
 @property (nonatomic) NSDictionary *note;
+
 
 @end

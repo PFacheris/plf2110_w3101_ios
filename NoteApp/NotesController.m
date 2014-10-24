@@ -124,6 +124,12 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - DetailViewControllerDelegate Methods
+- (void)DetailViewControllerDidDelete:(DetailViewController *)detailVc
+{
+    [self.notes removeObjectAtIndex:detailVc.index];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 #pragma mark - Interface Actions
 
