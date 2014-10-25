@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Patrick Facheris. All rights reserved.
 //
 
+#import <MessageUI/MessageUI.h>
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
@@ -18,6 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [self cycleMailComposer];
     return YES;
 }
 
@@ -41,6 +43,12 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(void)cycleMailComposer
+{
+    self.globalMailComposer = nil;
+    self.globalMailComposer = [[MFMailComposeViewController alloc] init];
 }
 
 @end

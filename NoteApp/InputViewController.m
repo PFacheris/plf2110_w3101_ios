@@ -11,8 +11,6 @@
 
 @interface InputViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (strong, nonatomic) NSString *imagePath;
-
 @end
 
 @implementation InputViewController
@@ -23,6 +21,7 @@
     self.bodyView.layer.borderWidth = .5;
     self.bodyView.layer.cornerRadius = 5;
     self.bodyView.clipsToBounds = YES;
+
 }
 
 -(IBAction)titleFieldReturn:(id)sender
@@ -63,10 +62,20 @@
 }
 
 - (IBAction)addImageButtonPressed:(id)sender {
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    imagePickerController.delegate = self;
-    [self presentViewController:imagePickerController animated:YES completion:nil];
+    if (self.imageView.image) {
+        self.imagePath = nil;
+        self.imageView.image = nil;
+        
+        [sender setTitle:@"Add Image" forState:UIControlStateNormal];
+
+    }
+    else {
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePickerController.delegate = self;
+        [self presentViewController:imagePickerController animated:YES completion:nil];
+        [sender setTitle:@"Remove Image" forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - UIImagePickerControllerDelegate Methods

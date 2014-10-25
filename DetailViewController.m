@@ -7,6 +7,7 @@
 //
 
 #import <MessageUI/MessageUI.h>
+#import "AppDelegate.h"
 #import "DetailViewController.h"
 #import "InputViewController.h"
 
@@ -58,31 +59,43 @@
     [inputVC view];
     inputVC.bodyView.text = self.note[@"Body"];
     inputVC.titleField.text = self.note[@"Title"];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    inputVC.imageView.image = [UIImage imageWithContentsOfFile:
-                            [documentsDirectory stringByAppendingPathComponent:self.note[@"ImagePath"]]
-                            ];
-    [inputVC.imageView setNeedsDisplay];
+    inputVC.imagePath = [self.note objectForKey:@"ImagePath"];
+    if (inputVC.imagePath)
+    {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        inputVC.imageView.image = [UIImage imageWithContentsOfFile:
+                                   [documentsDirectory stringByAppendingPathComponent:self.note[@"ImagePath"]]
+                                   ];
+        [inputVC.addImageButton setTitle:@"Remove Image" forState:UIControlStateNormal];
+        [inputVC.imageView setNeedsDisplay];
+    }
 }
 
 - (IBAction)shareButtonPressed:(id)sender {
-    NSString *subject = self.note[@"Title"];
-    NSString *body = self.note[@"Body"];
+    if ( [MFMailComposeViewController canSendMail] ) {
+        NSString *subject = self.note[@"Title"];
+        NSArray *recipient = [NSArray arrayWithObject:@"test@email.com"];
+        NSString *body = self.note[@"Body"];
     
-    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
-    mc.mailComposeDelegate = self;
-    [mc setSubject:subject];
-    [mc setMessageBody:body isHTML:NO];
+        APP.globalMailComposer.mailComposeDelegate = self;
+        [APP.globalMailComposer setSubject:subject];
+        [APP.globalMailComposer setToRecipients:recipient];
+        [APP.globalMailComposer setMessageBody:body isHTML:NO];
     
-    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSData *fileData = [NSData dataWithContentsOfFile:[documentsDirectory stringByAppendingPathComponent:self.note[@"ImagePath"]]
-    ];
-    NSString *mimeType = @"image/jpeg";
+        NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSData *fileData = [NSData dataWithContentsOfFile:[documentsDirectory stringByAppendingPathComponent:self.note[@"ImagePath"]]
+        ];
+        NSString *mimeType = @"image/jpeg";
     
-    [mc addAttachmentData:fileData mimeType:mimeType fileName:[self.note[@"Title"] stringByStandardizingPath]];
+        [APP.globalMailComposer addAttachmentData:fileData mimeType:mimeType fileName:[[self.note[@"Title"] stringByAppendingString:@".jpeg"] stringByStandardizingPath]];
     
-    [self presentViewController:mc animated:YES completion:nil];
+        [self presentViewController:APP.globalMailComposer animated:YES completion:nil];
+    }
+    else
+    {
+        [APP cycleMailComposer];
+    }
 }
 
 #pragma mark - InputViewControllerDelegate Methods
@@ -105,6 +118,7 @@
 {
     self.note[@"Title"] = title;
     self.note[@"Body"] = body;
+    [self.note removeObjectForKey:@"ImagePath"];
     [self reloadUI];
     [self.delegate detailViewControllerDidUpdate:self];
     [self.navigationController popViewControllerAnimated:YES];
@@ -119,7 +133,9 @@
 #pragma mark - MFMailComposeViewControllerDelegate Methods
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    [self dismissViewControllerAnimated:YES completion:NULL];
+    [self dismissViewControllerAnimated:YES completion:^
+     { [APP cycleMailComposer]; }
+     ];
 }
 
 

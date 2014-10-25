@@ -32,5 +32,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
 @property (weak, nonatomic) IBOutlet UITextView *bodyView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) NSString *imagePath;
+@property (weak, nonatomic) IBOutlet UIButton *addImageButton;
 
 @end
